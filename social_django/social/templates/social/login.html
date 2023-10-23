@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artix</title>
+    <link rel="shortcut icon" href="{% static 'logoh.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    
+</head>
+<header class="main-head">
+    <nav class="main">
+            
+        <img class="icon" src="{% static 'A.png' %}" alt="Inicio" style="max-width: 100px; max-height: 100px;">
+
+    </nav>
+</header>
+<body>
+
+
+    <main>
+        
+        {% block content %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="notification">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="container" onclick>
+                <div class="top"></div>
+                <div class="bottom"></div>
+                <div class="center">
+                    <h1>Bienvenido a Artix</h1>
+
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" id="submit">Login</button>
+                    </form>
+                    <br><br>
+                    <a href="{% url 'password_reset' %}" class="forgot-password-link">¿Olvidaste tu contraseña?</a>
+                    <a href="{% url 'register' %}">Crear mi cuenta</a>
+                    <h2>&nbsp;</h2>
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+
+    <!-- Incluye el archivo de script si es necesario -->
+    <script src="script.js"></script>
+
+</body>
+</html>

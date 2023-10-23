@@ -1,0 +1,52 @@
+
+<!-- social/layout.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artix</title>
+    <link rel="shortcut icon" href="{% static 'logoh.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style2.css' %}">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+</head>
+<header class="main-head">
+    <nav class="main">
+
+            <a href="{% url 'login' %}"><img class="icon" src="{% static 'A.png' %}" alt="Inicio" style="max-width: 100px; max-height: 100px;"></a>
+      
+    </nav>
+</header>
+<body>
+    <main>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="notification">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+
+            <div class="container" onclick>
+                <div class="top"></div>
+                <div class="bottom"></div>
+                <div class="center">
+                    <h1>Registrate a Artix</h1>
+                    <form class="form" method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        {{ profile_form.as_p }}
+                        <button type="submit" id="submit">Registrate</button>
+                    </form>
+                    
+                    <h2>&nbsp;</h2>
+                </div>
+            </div>
+        {% endblock %}
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
